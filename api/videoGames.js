@@ -34,7 +34,7 @@ router.get("/:id", async (req, res, next) => {
 });
 
 // POST - /api/video-games - create a new video game
-router.post("/", async (req, res, next) => {
+router.patch("/", async (req, res, next) => {
   try {
     const newVideoGame = await createVideoGame(req.body);
     res.send(newVideoGame);
@@ -46,8 +46,7 @@ router.post("/", async (req, res, next) => {
 // PUT - /api/video-games/:id - update a single video game by id
 router.put("/:id", async (req, res, next) => {
   try {
-    const videoGameId = req.params.id;
-    const updatedVideoGame = await updateVideoGame(videoGameId, req.body);
+    const updatedVideoGame = await updateVideoGame(req.params.id, req.body);
     res.send(updatedVideoGame);
   } catch (error) {
     next(error);
